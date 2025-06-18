@@ -68,7 +68,8 @@ async function sendMessage() {
     // Create new assistant response element
     const assistantMessageEl = document.createElement("div");
     assistantMessageEl.className = "message assistant-message";
-    assistantMessageEl.innerHTML = "<p></p>";
+    const assistantP = document.createElement("p");
+    assistantMessageEl.appendChild(assistantP);
     chatMessages.appendChild(assistantMessageEl);
 
     // Scroll to bottom
@@ -113,7 +114,7 @@ async function sendMessage() {
           if (jsonData.response) {
             // Append new content to existing text
             responseText += jsonData.response;
-            assistantMessageEl.querySelector("p").textContent = responseText;
+            assistantP.textContent = responseText;
 
             // Scroll to bottom
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -150,7 +151,9 @@ async function sendMessage() {
 function addMessageToChat(role, content) {
   const messageEl = document.createElement("div");
   messageEl.className = `message ${role}-message`;
-  messageEl.innerHTML = `<p>${content}</p>`;
+  const p = document.createElement("p");
+  p.textContent = content;
+  messageEl.appendChild(p);
   chatMessages.appendChild(messageEl);
 
   // Scroll to bottom
